@@ -11,8 +11,9 @@
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
     "resolveJsonModule": true,
-    "allowSyntheticDefaultImports": true
+    "allowSyntheticDefaultImports": true,
+    "types": ["@nuxt/types", "@types/node", "@vue/runtime-core", "vite/client"]
   },
   "exclude": ["node_modules", ".nuxt", "dist"],
-  "include": ["**/*.ts", "**/*.tsx", "**/*.vue"]
+  "include": ["types/env.d.ts", "**/*.ts", "**/*.tsx", "**/*.vue"]
 }

@@ -5,14 +5,15 @@ dotenv.config();
 
 export default defineNuxtConfig({
   css: ['~/assets/style.css'],
-  plugins: ['~/plugins/store.ts', '~/plugins/supabase.ts'],
+  plugins: ['~/plugins/supabase.ts'],
   typescript: {
     strict: true,
   },
   runtimeConfig: {
     public: {
-      supabaseUrl: process.env.SUPABASE_URL,
-      supabaseKey: process.env.SUPABASE_KEY,
+      supabaseUrl: process.env.NUXT_SUPABASE_URL,
+      supabaseKey: process.env.NUXT_SUPABASE_KEY,
     },
   },
+  pages: true, // Ensure this is set to true to enable pages
 });

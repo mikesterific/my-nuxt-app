@@ -10,9 +10,9 @@
     "postinstall": "nuxt prepare"
   },
   "dependencies": {
+    "@nuxtjs/dotenv": "^1.4.2",
     "@supabase/supabase-js": "^2.43.4",
     "axios": "^1.7.2",
-    "dotenv": "^16.4.5",
     "esm": "^3.2.25",
     "highlight.js": "^11.9.0",
     "nuxt": "^3.11.2",
@@ -30,6 +30,7 @@
     "jest-environment-jsdom": "^29.7.0",
     "less": "^4.2.0",
     "ts-jest": "^29.1.4",
-    "typescript": "^5.4.5"
+    "typescript": "^5.4.5",
+    "vite": "^5.2.13"
   }
 }

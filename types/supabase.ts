@@ -1,3 +1,13 @@
-Need to install the following packages:
-supabase@1.172.2
-Ok to proceed? (y) 
+import { SupabaseClient } from '@supabase/supabase-js';
+
+declare module '#app' {
+  interface NuxtApp {
+    $supabase: SupabaseClient;
+  }
+}
+
+declare module 'vue' {
+  interface ComponentCustomProperties {
+    $supabase: SupabaseClient;
+  }
+}

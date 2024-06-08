@@ -34,9 +34,9 @@ export interface State {
 }
 
 export const initialState: State = {
-  OPENAI_API_KEY: import.meta.env.VITE_OPENAI_API_KEY || '',
-  SUPABASE_KEY: import.meta.env.VITE_SUPABASE_KEY || '',
-  SUPABASE_URL: import.meta.env.VITE_SUPABASE_URL || '',
+  OPENAI_API_KEY: import.meta.env.NUXT_OPENAI_API_KEY || '',
+  SUPABASE_KEY: import.meta.env.NUXT_SUPABASE_KEY || '',
+  SUPABASE_URL: import.meta.env.NUXT_SUPABASE_URL || '',
   bestPractice: '',
   component: {
     content: '',

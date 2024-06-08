@@ -1,6 +1,5 @@
 import axios from 'axios';
 import type { ActionTree } from 'vuex';
-import { supabase } from '~/js/supabase.js';
 import { extractCodeBlock } from '../js/utils';
 import { sendOpenAIMessage, cosineSimilarity } from './helpers';
 import vueTestingPrompt from '@/prompts/testing';
@@ -9,6 +8,7 @@ import vueTestingPrompt from '@/prompts/testing';
 // import jsTestingPrompt from '@/prompts/jstesting';
 // import mochaTestingPrompt from '@/prompts/mocha';
 import type { State, Document } from './state';
+import { useNuxtApp } from '#app';
 
 interface MessagePayload {
   message: string;
@@ -300,7 +300,8 @@ const actions: ActionTree<State, State> = {
     }: { queryEmbedding: number[]; tableName: string }
   ) {
     try {
-      const { data, error } = await supabase
+      const { $supabase } = useNuxtApp();
+      const { data, error } = await $supabase
         .from(tableName)
         .select('id, title, content, embedding');
 

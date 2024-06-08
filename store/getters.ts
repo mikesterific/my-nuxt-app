@@ -1,5 +1,5 @@
-import { GetterTree } from 'vuex';
-import { State } from './state';
+import type { GetterTree } from 'vuex';
+import type { State } from './state';
 
 const getters: GetterTree<State, State> = {
   conversation: (state) => state.conversation,
