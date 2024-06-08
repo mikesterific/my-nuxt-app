@@ -1,12 +1,14 @@
 import axios from 'axios';
-import { ActionContext, ActionTree } from 'vuex';
-import { supabase } from '../js/supabase';
+import type { ActionTree } from 'vuex';
+import { supabase } from '~/js/supabase.js';
 import { extractCodeBlock } from '../js/utils';
 import { sendOpenAIMessage, cosineSimilarity } from './helpers';
-import vueTestingPrompt from '../prompts/testing';
-import jsTestingPrompt from '../prompts/jstesting';
-import mochaTestingPrompt from '../prompts/mocha';
-import { State, Document } from './state';
+import vueTestingPrompt from '@/prompts/testing';
+// import jsTestingPrompt from '@/prompts/jstesting';
+// import mochaTestingPrompt from '@/prompts/mocha';
+// import jsTestingPrompt from '@/prompts/jstesting';
+// import mochaTestingPrompt from '@/prompts/mocha';
+import type { State, Document } from './state';
 
 interface MessagePayload {
   message: string;
@@ -87,17 +89,12 @@ const actions: ActionTree<State, State> = {
         .join(' ');
 
       const initialQuery =
-        state.testType === 'testing'
-          ? vueTestingPrompt(
-              state.component.content,
-              stringifyBestPractices,
-              state.component.name
-            )
-          : jsTestingPrompt(
-              state.component.content,
-              stringifyBestPractices,
-              state.component.name
-            );
+        state.testType ===
+        vueTestingPrompt(
+          state.component.content,
+          stringifyBestPractices,
+          state.component.name
+        );
 
       if (!initialQuery) {
         throw new Error('Failed to generate initial query.');
@@ -304,7 +301,7 @@ const actions: ActionTree<State, State> = {
   ) {
     try {
       const { data, error } = await supabase
-        .from<Document>(tableName)
+        .from(tableName)
         .select('id, title, content, embedding');
 
       if (error) {
@@ -313,12 +310,17 @@ const actions: ActionTree<State, State> = {
 
       if (data && data.length > 0) {
         const searchResults = data
-          .map((doc) => ({
-            id: doc.id,
-            similarity: cosineSimilarity(queryEmbedding, doc.embedding),
-            content: doc.content,
-          }))
-          .sort((a, b) => b.similarity - a.similarity)
+          .map(
+            (doc: { id: any; embedding: string | number[]; content: any }) => ({
+              id: doc.id,
+              similarity: cosineSimilarity(queryEmbedding, doc.embedding),
+              content: doc.content,
+            })
+          )
+          .sort(
+            (a: { similarity: number }, b: { similarity: number }) =>
+              b.similarity - a.similarity
+          )
           .slice(0, 3);
 
         return searchResults;

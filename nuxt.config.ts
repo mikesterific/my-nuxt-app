@@ -1,14 +1,18 @@
-// https://nuxt.com/docs/api/configuration/nuxt-config
+import { defineNuxtConfig } from 'nuxt/config';
+import dotenv from 'dotenv';
+
+dotenv.config();
+
 export default defineNuxtConfig({
-  devtools: { enabled: true },
+  css: ['~/assets/style.css'],
+  plugins: ['~/plugins/store.ts', '~/plugins/supabase.ts'],
   typescript: {
     strict: true,
   },
-  build: {
-    transpile: [
-      '@vue/test-utils',
-      '@testing-library/vue',
-      'jest-environment-jsdom',
-    ],
+  runtimeConfig: {
+    public: {
+      supabaseUrl: process.env.SUPABASE_URL,
+      supabaseKey: process.env.SUPABASE_KEY,
+    },
   },
 });

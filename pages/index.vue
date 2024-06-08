@@ -12,7 +12,6 @@
 <script lang="ts">
 import { defineComponent, ref } from 'vue';
 import { useStore } from 'vuex';
-import { Store } from 'vuex';
 import Conversation from '@/components/Conversation.vue';
 import Input from '@/components/Input.vue';
 import DropFile from '@/components/DropFile.vue';
